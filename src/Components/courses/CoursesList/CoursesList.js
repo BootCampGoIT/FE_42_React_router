@@ -1,6 +1,6 @@
 import React from "react";
 
-const CoursesList = () => {
+const CoursesList = ({ courses }) => {
   return <h2>Courses List</h2>;
 };
 

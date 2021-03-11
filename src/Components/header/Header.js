@@ -1,12 +1,13 @@
 import React from "react";
+import { mainRoutes } from "../../routes/mainRoutes";
+import Navigation from "../navigation/Navigation";
 import { HeaderContainer } from "./HeaderStyled";
-import Navigation from "./navigation/Navigation";
 
 const Header = () => {
   return (
     <HeaderContainer>
       <h2>LOGO</h2>
-      <Navigation />
+      <Navigation routes={mainRoutes} />
     </HeaderContainer>
   );
 };

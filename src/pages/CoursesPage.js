@@ -1,41 +1,70 @@
-import React, { useEffect } from "react";
-import Content from "../Components/courses/content/Content";
-import Navigation from "../Components/courses/navigation/Navigation";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import React, { Component } from "react";
+import Navigation from "../Components/navigation/Navigation";
+import { coursesRoutes } from "../routes/coursesRoutes";
+import NavigationContent from "../Components/navigation/NavigationContent";
 
-const CoursesPage = () => {
-  const history = useHistory();
-  const match = useRouteMatch();
+class CoursesPage extends Component {
+  state = {
+    courses: [],
+    from: "",
+  };
 
-  useEffect(() => {
-    history.push(`${match.url}/list`);
-  }, [history, match.url]);
+  componentDidMount() {
+    this.setState({ from: this.props.location.state?.from });
+    // this.props.history.push(`${this.props.match.url}/list`);
+  }
 
-  return (
-    <>
-      <Navigation match={match.url} />
-      <Content match={match.url} />
-    </>
-  );
-};
+  addCourse = (course) => {
+    this.setState((prev) => ({
+      courses: [...prev.courses, { ...course, id: `${new Date()}` }],
+    }));
+  };
+
+  goBack = () => {
+    this.props.history.push(this.state.from);
+  };
+
+  render() {
+    return (
+      <>
+        <h2>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo,
+          debitis?
+        </h2>
+        <button
+          type='button'
+          onClick={this.goBack}
+          disabled={!this.state.from && "disabled"}>
+          Go Back
+        </button>
+        <Navigation routes={coursesRoutes} match={this.props.match.url} />
+        <NavigationContent
+          routes={coursesRoutes}
+          match={this.props.match.url}
+          courses={this.state.courses}
+          addCourse={this.addCourse}
+        />
+      </>
+    );
+  }
+}
 
 export default CoursesPage;
 
-// class CoursesPage extends Component {
-//   state = {};
+// const CoursesPage = () => {
+//   const history = useHistory();
+//   const match = useRouteMatch();
 
-//   componentDidMount() {
-//     this.props.history.push(`${this.props.match.url}/list`);
-//   }
+//   useEffect(() => {
+//     history.push(`${match.url}/list`);
+//   }, [history, match.url]);
 
-//   render() {
-//     return (
-//       <>
-//         <Navigation match={this.props.match.url} />
-//         <Content match={this.props.match.url} />
-//       </>
-//     );
-//   }
-// }
+//   return (
+//     <>
+//       <Navigation match={match.url} />
+//       <Content match={match.url} />
+//     </>
+//   );
+// };
 
 // export default CoursesPage;
