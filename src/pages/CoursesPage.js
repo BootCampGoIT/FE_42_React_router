@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Navigation from "../Components/navigation/Navigation";
 import { coursesRoutes } from "../routes/coursesRoutes";
 import NavigationContent from "../Components/navigation/NavigationContent";
+import picture from "./222.png";
 
 class CoursesPage extends Component {
   state = {
@@ -31,6 +32,7 @@ class CoursesPage extends Component {
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo,
           debitis?
         </h2>
+        <img src={picture} alt='fghj' />
         <button
           type='button'
           onClick={this.goBack}
